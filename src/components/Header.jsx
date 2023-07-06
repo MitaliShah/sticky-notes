@@ -9,8 +9,24 @@ export default function Header() {
                     type="text"
                     placeholder="Type here to search..."
                 />
+            <ul>
+            <li>
+                <input type="text" placeholder="Title" />
+                <textarea placeholder="Description..." />
+                <span>X</span>
+            </li>
+            <li>
+                <input type="text" placeholder="Title" />
+                <textarea placeholder="Description..." />
+                <span>X</span>
+            </li>
+            <li>
+                <input type="text" placeholder="Title" />
+                <textarea placeholder="Description..." />
+                <span>X</span>
+            </li>
+            </ul>
             </aside>
-        </>
-        
+        </>    
     )
 }
