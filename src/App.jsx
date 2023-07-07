@@ -1,12 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import NotesList from "./components/NotesList";
 import "./styles.css";
 
-function App() {	
-	const [notes, setNotes] = useState([]);
+function App() {
+	// Getting the notes from local storage
+	const [notes, setNotes] = useState(
+    	JSON.parse(window.localStorage.getItem("notes")) || []
+  	);
 	const [searchText, setSearchText] = useState("");
+
+	useEffect(() => {
+		// Setting the notes to the local storage
+    	window.localStorage.setItem("notes", JSON.stringify(notes));
+	}, [notes]);
 	
+	// Add new note object to the notes array
 	function addNote() {
 		const newNote = {		
 			id: Date.now(),
@@ -14,11 +23,10 @@ function App() {
 			description: "",
 			doesMatchSearch: true,		
 		}
-		console.log(`newNote`, newNote);
-		console.log(`notes`, notes);
-		setNotes((notes) => [newNote, ...notes])
+		setNotes((previousNotes) => [newNote, ...previousNotes])
 	}
 
+	// Filter list of notes if thy match search text
 	function onSearch(text) {
 		const newSearchText = text.toLowerCase();
 		const updatedNotes = notes.map((note) => {
@@ -39,6 +47,7 @@ function App() {
 		setSearchText(newSearchText)
 	}
 
+	
 	function updateNote(noteId, fieldToUpdate, textValue) {
 		const updatedNotes = notes.map((note) => {
 			if (note.id != noteId) {
@@ -70,7 +79,6 @@ function App() {
 		/>
 		<NotesList
 				notes={notes}
-				// setNotes={setNotes}
 				updateNote={updateNote}
 				deleteNote={deleteNote}
 		/>

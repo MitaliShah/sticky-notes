@@ -9,6 +9,5 @@ export default function NotesList({ notes, updateNote, deleteNote }) {
   );
 
   const noteElements = searchMatches.map(renderNote);
-  return <ul className="notes-list">{noteElements}</ul>;
-  
+  return <ul className="notes-list">{noteElements}</ul>;  
 }
