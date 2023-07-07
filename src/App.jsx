@@ -54,7 +54,11 @@ function App() {
 		setNotes(updatedNotes)
 	}
 
-	
+	function deleteNote(noteId) {
+		const updatedNotes = notes.filter((note) => note.id !== noteId)
+		setNotes(updatedNotes);
+		console.log(notes)
+	}
   
 	return (
     <>
@@ -68,6 +72,7 @@ function App() {
 				notes={notes}
 				// setNotes={setNotes}
 				updateNote={updateNote}
+				deleteNote={deleteNote}
 		/>
     </>
   )

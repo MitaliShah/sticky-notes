@@ -1,6 +1,6 @@
 
 
-export default function Note({ note, updateNote }) {  
+export default function Note({ note, updateNote, deleteNote }) {  
     const updateTitle = (e) => {
         const textValue = e.target.value;
         const noteId = note.id
@@ -27,7 +27,10 @@ export default function Note({ note, updateNote }) {
                 value={note.description}
                 onChange={updateDescription}
             />
-            <span className="note__delete">X</span>
+            <span
+                className="note__delete"
+                onClick={() =>deleteNote(note.id)}
+            >X</span>
         </li>
     )
 }
