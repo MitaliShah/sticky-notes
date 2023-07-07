@@ -19,21 +19,42 @@ function App() {
 		setNotes((notes) => [newNote, ...notes])
 	}
 
-	
-	function onType(editMeId, updatedKey, updatedValue) {
+	function onSearch(text) {
+		const newSearchText = text.toLowerCase();
 		const updatedNotes = notes.map((note) => {
-			if (note.id != editMeId) {
+			if (!newSearchText) {
+				note.doesMatchSearch = true;
 				return note;
 			} else {
-				if (updatedKey === "title") {
-					return {...note, title: updatedValue}
+				const title = note.title.toLowerCase();
+				const description = note.description.toLowerCase();
+				const titleMatch = title.includes(newSearchText);
+				const descriptionMatch = description.includes(newSearchText);
+				const hasMatch = titleMatch || descriptionMatch;
+				note.doesMatchSearch = hasMatch;
+				return note;
+			}
+		})
+		setNotes(updatedNotes)
+		setSearchText(newSearchText)
+	}
+
+	function updateNote(noteId, fieldToUpdate, textValue) {
+		const updatedNotes = notes.map((note) => {
+			if (note.id != noteId) {
+				return note;
+			} else {
+				if (fieldToUpdate === "title") {
+					return {...note, title: textValue}
 				} else {
-					return {...note, description: updatedValue}
+					return {...note, description: textValue}
 				}
 			}
 		})
 		setNotes(updatedNotes)
 	}
+
+	
   
 	return (
     <>
@@ -41,12 +62,12 @@ function App() {
 				searchText={searchText}
 				setSearchText={setSearchText}
 				addNote={addNote}
-				
+				onSearch={onSearch}
 		/>
 		<NotesList
 				notes={notes}
 				// setNotes={setNotes}
-				onType={onType}
+				updateNote={updateNote}
 		/>
     </>
   )

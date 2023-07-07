@@ -1,5 +1,7 @@
 
-export default function Header({addNote, searchText, setSearchText}) {
+export default function Header({ addNote, searchText, setSearchText, onSearch }) {
+    
+    
 
     return (
         <>
@@ -15,7 +17,10 @@ export default function Header({addNote, searchText, setSearchText}) {
                         placeholder="Type here to search..."
                         className="search"
                         value={searchText}
-                        onChange={(e) => setSearchText(e.target.value)}
+                        onChange={(e) => {
+                            setSearchText(e.target.value)
+                            onSearch(e.target.value)
+                        }}
                     />
             </aside>
             </header>    

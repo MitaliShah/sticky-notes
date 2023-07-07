@@ -1,16 +1,16 @@
 
 
-export default function Note({ note, onType }) {  
+export default function Note({ note, updateNote }) {  
     const updateTitle = (e) => {
-        const updatedValue = e.target.value;
-        const editMeId = note.id
-        onType(editMeId, "title", updatedValue);
+        const textValue = e.target.value;
+        const noteId = note.id
+        updateNote(noteId, "title", textValue);
     }
 
     const updateDescription = (e) => {
-         const updatedValue = e.target.value;
-        const editMeId = note.id
-        onType(editMeId, "description", updatedValue);
+         const textValue = e.target.value;
+        const noteId = note.id
+        updateNote(noteId, "description", textValue);
     }
     return (
         <li className="note">
