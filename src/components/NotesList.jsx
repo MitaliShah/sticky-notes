@@ -1,14 +1,14 @@
 import Note from "./Note";
 
-export default function NotesList() {  
-  return (
-      <>
-        <ul className="notes-list">
-            <Note />
-            <Note />
-            <Note />
-        </ul>
-          
-    </>
-  )
+export default function NotesList({ notes, onType }) {
+  const keepSearchMatches = (note) => note.doesMatchSearch;
+  const searchMatches = notes.filter(keepSearchMatches);
+
+  const renderNote = (note) => (
+    <Note note={note} key={note.id} onType={onType} />
+  );
+
+  const noteElements = searchMatches.map(renderNote);
+  return <ul className="notes-list">{noteElements}</ul>;
+  
 }
